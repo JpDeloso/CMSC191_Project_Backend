@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import setUpRouter from "./router.js";
-import MongoDBModels from "../models/index.js";
+import { UserModel } from "../models/index.js";
 
 dotenv.config();
 
@@ -18,5 +18,7 @@ await mongoose.connect(process.env.MONGOOSE_CONNSTR, {
 });
 
 setUpRouter(app);
+
+app.listen(5000, () => console.log("Listening to port 5000."));
 
 export default app;

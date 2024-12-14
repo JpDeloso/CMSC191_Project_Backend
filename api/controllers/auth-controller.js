@@ -13,6 +13,7 @@ const isUpMail = (email) => {
 
 const register = async (req, res) => {
     const { email, password } = req.body;
+    const role = "user"; // all users registered through website only have the user role
 
     // check if UP mail
     if (!isUpMail(email)) return res.status(400).send(authErrorCodes["not-up-mail"]);
@@ -21,7 +22,7 @@ const register = async (req, res) => {
     if (await emailExists(email)) return res.status(400).send(authErrorCodes["email-exists"]);
 
     // register user
-    await UserModel.create({ email, password });
+    await UserModel.create({ email, password, role });
 
     return res.status(200).send({ email });
 }
