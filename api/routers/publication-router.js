@@ -10,6 +10,6 @@ const publicationRouter = express.Router();
 
 // initialize HTTP methods
 publicationRouter.get("/getTestPublication", getTestPublication);
-publicationRouter.post("/fullSearch", fullSearch)
+publicationRouter.post("/fullSearch", fullSearch);
 
 export default publicationRouter;
