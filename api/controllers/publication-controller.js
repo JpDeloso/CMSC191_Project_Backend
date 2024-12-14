@@ -39,7 +39,7 @@ const fullSearch = async (req, res) => {
 
 const searchByTitle = async (req, res) => {
     try {
-        const { query } = req.body; 
+        const { query, size = 100 } = req.body; 
         if (!query) {
             return res.status(400).json({ error: 'Search query is required' });
         }
@@ -75,6 +75,7 @@ const searchByTitle = async (req, res) => {
         // Perform the search query.
         const result = await ESClient.search({
             index: "publications",
+            size: size,
             query: esQuery
         });
 
