@@ -18,7 +18,7 @@ const fullSearch = async (req, res) => {
         index: "publications",
         query: {
             multi_match: {
-                query
+                query: query
             }
         }
     })
