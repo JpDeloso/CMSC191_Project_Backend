@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 import setUpRouter from "./router.js";
-import { UserModel } from "../models/index.js";
+import MongoDBModels from "../models/index.js";
 
-dotenv.config()
+dotenv.config();
 
 const app = express();
 
