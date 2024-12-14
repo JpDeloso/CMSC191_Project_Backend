@@ -106,6 +106,7 @@ const searchByAuthor = async (req, res) => {
 
         const result = await ESClient.search({
             index: "publications",
+            size: 100,
             query: {
                 bool: {
                     should: [
