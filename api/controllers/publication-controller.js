@@ -26,7 +26,43 @@ const fullSearch = async (req, res) => {
     return res.status(200).send(result.hits.hits);
 }
 
+const sortPublications = async (req, res) => {
+    try {
+        const { sortField, sortOrder = "asc", size = 100 } = req.body;
+
+        if (!sortField) {
+            return res.status(400).json({ error: "Sort field is required." });
+        }
+
+        const result = await ESClient.search({
+            index: "publications",
+            size: size,
+            sort: [
+                { [sortField]: { order: sortOrder } }
+            ],
+            query: {
+                match_all: {}
+            }
+        });
+
+        return res.status(200).json({
+            total: result.hits.total.value,
+            results: result.hits.hits.map(hit => ({
+                id: hit._id,
+                score: hit._score,
+                ...hit._source
+            }))
+        });
+
+    } catch (error) {
+        console.error("Error sorting publications:", error.meta?.body?.error || error);
+        return res.status(500).json({ error: "Error sorting publications." });
+    }
+};
+
+
 export {
     getTestPublication,
-    fullSearch
+    fullSearch,
+    sortPublications
 }
