@@ -147,7 +147,7 @@ const searchByAuthor = async (req, res) => {
     }
 };
 
-const searchByIndexTerms = async (req, res) => {
+const searchByIndexTerms = async (req, res) => { //can be omitted since there are no index terms in the data
     try {
         const { query } = req.body;
         if (!query) {
